@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.generation.blogpessoal.model.Postagem;
 import com.generation.blogpessoal.repository.PostagemRepository;
 import com.generation.blogpessoal.repository.TemaRepository;
+import com.generation.blogpessoal.repository.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,9 @@ public class PostagemController {
 	@Autowired
 	private TemaRepository temaRepository;
 
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll() {
 		return ResponseEntity.ok(postagemRepository.findAll());
@@ -54,22 +58,24 @@ public class PostagemController {
 
 	@PostMapping
 	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){
-		if (temaRepository.existsById(postagem.getTema().getId()))
+		if (temaRepository.existsById(postagem.getTema().getId()) && 
+				usuarioRepository.existsById(postagem.getUsuario().getId()) )
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(postagemRepository.save(postagem));
 			
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema e/ou Usuário não existem!", null);
 	}
 	
 	@PutMapping
 	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
 		if (postagemRepository.existsById(postagem.getId())){
 			
-			if (temaRepository.existsById(postagem.getTema().getId()))
+			if (temaRepository.existsById(postagem.getTema().getId()) && 
+					usuarioRepository.existsById(postagem.getUsuario().getId()) )
 				return ResponseEntity.status(HttpStatus.OK)
 						.body(postagemRepository.save(postagem));
 			
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema e/ou Usuário não existem!", null);
 			
 		}			
 			
