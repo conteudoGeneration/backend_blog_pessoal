@@ -6,7 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterAll;
+import com.generation.blogpessoal.model.Usuario;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-
-import com.generation.blogpessoal.model.Usuario;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -27,6 +26,8 @@ public class UsuarioRepositoryTest {
 	@BeforeAll
 	void start(){
 
+		usuarioRepository.deleteAll();
+		
 		usuarioRepository.save(new Usuario(0L, "João da Silva", "https://i.imgur.com/h4t8loa.jpg", "joao@email.com.br", "13465278"));
 		
 		usuarioRepository.save(new Usuario(0L, "Manuela da Silva", "https://i.imgur.com/NtyGneo.jpg", "manuela@email.com.br", "13465278"));
@@ -55,11 +56,6 @@ public class UsuarioRepositoryTest {
 		assertTrue(listaDeUsuarios.get(1).getNome().equals("Manuela da Silva"));
 		assertTrue(listaDeUsuarios.get(2).getNome().equals("Adriana da Silva"));
 		
-	}
-
-	@AfterAll
-	void end() {
-		usuarioRepository.deleteAll();
 	}
 
 }
