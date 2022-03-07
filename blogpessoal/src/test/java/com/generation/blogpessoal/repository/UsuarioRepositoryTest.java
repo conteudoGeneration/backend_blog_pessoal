@@ -56,4 +56,9 @@ public class UsuarioRepositoryTest {
 		
 	}
 
+	@BeforeAll
+	void end(){
+		usuarioRepository.deleteAll();
+	}
+	
 }
