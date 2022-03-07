@@ -26,6 +26,8 @@ public class UsuarioRepositoryTest {
 	@BeforeAll
 	void start(){
 
+		usuarioRepository.deleteAll();
+
 		usuarioRepository.save(new Usuario(0L, "João da Silva", "https://i.imgur.com/h4t8loa.jpg", "joao@email.com.br", "13465278"));
 		
 		usuarioRepository.save(new Usuario(0L, "Manuela da Silva", "https://i.imgur.com/NtyGneo.jpg", "manuela@email.com.br", "13465278"));
@@ -56,9 +58,4 @@ public class UsuarioRepositoryTest {
 		
 	}
 
-	@BeforeAll
-	void end(){
-		usuarioRepository.deleteAll();
-	}
-	
 }
