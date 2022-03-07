@@ -58,7 +58,7 @@ public class PostagemController {
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(postagemRepository.save(postagem));
 			
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema e/ou Usuário não existem!", null);
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
 	}
 	
 	@PutMapping
@@ -69,7 +69,7 @@ public class PostagemController {
 				return ResponseEntity.status(HttpStatus.OK)
 						.body(postagemRepository.save(postagem));
 			
-						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema e/ou Usuário não existem!", null);
+						throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
 			
 		}			
 			
