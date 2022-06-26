@@ -11,7 +11,7 @@
 	<artifactId>blogpessoal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blogpessoal</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Projeto Blog Pessoal</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -49,12 +49,14 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<!-- Dependência para o Banco de dados H2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<!-- Configuração do JUnit -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
